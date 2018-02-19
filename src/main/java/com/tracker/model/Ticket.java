@@ -1,6 +1,5 @@
 package com.tracker.model;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -23,7 +22,7 @@ public class Ticket {
     @Column(name = "ID", unique = true)
     private int idNumber;
     private String reportedUser;
-    private String assignUser;
+    private String assignedUser;
     private String status;
     private String title;
     private String description;
@@ -34,9 +33,9 @@ public class Ticket {
     private List<Commentary> commentaryList = new ArrayList<>();
 
 
-    public Ticket(String reportedUser, String assignUser, String status, String title, String description) {
+    public Ticket(String reportedUser, String assignedUser, String status, String title, String description) {
         this.reportedUser = reportedUser;
-        this.assignUser = assignUser;
+        this.assignedUser = assignedUser;
         this.status = status;
         this.title = title;
         this.description = description;

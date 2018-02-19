@@ -11,12 +11,12 @@
     <title>Log into account</title>
 </head>
 <body>
-    <h1>Front</h1>
-    <form method="post" action="loggedIn">
+    <h3>Log to your account</h3>
+    <form method="GET" action="validation">
         Login <br />
-         <input type="text" name="username" /><br />
+        <input type="text" name="username" /><br />
         Password: <br />
-        <input type="password" name="password" /><br />
+        <input type="password" name="userPassword" /><br />
         <input type="submit" value="Log in">
     </form>
 </body>

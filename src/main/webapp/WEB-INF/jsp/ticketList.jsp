@@ -1,3 +1,4 @@
+<%@ page import="com.tracker.repository.VariableRepository" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
@@ -12,7 +13,12 @@
     <title>List of tickets</title>
 </head>
 <body>
-    <h3>Tabela</h3>
+    <p>You are logged as: <%= VariableRepository.getCurrentUsername() %></p>
+    <form method="post" action="/">
+        <input type="submit" value="Log out">
+    </form>
+    <br>
+    <h3>Tickets</h3>
     <table border="1">
         <thead>
             <tr>
@@ -31,21 +37,33 @@
                 <tr>
                     <td>${ticketList.idNumber}</td>
                     <td>${ticketList.reportedUser}</td>
-                    <td>${ticketList.assignUser}</td>
+                    <td>${ticketList.assignedUser}</td>
                     <td>${ticketList.status}</td>
                     <td>${ticketList.title}</td>
                     <td>${ticketList.description}</td>
                     <td>
-                        <ol>
+                        <ul>
                             <c:forEach var="comments" items="${ticketList.commentaryList}">
                                 <li>${comments.comment}</li>
                             </c:forEach>
-                        </ol>
+                            <li>
+                                <form method="post" action="comment">
+                                    <input type="submit" value="add comment">
+                                </form>
+                            </li>
+                        </ul>
                     </td>
-                    <td>Edit</td>
-                </tr>
-        </c:forEach>
-        </tbody>
-    </table>
+              <td>
+                  <form method="post" action="ticket">
+                      <input type="submit" value="edit ticket">
+                  </form>
+              </td>
+          </tr>
+  </c:forEach>
+  </tbody>
+</table>
+    <form method="post" action="newTicket">
+        <input type="submit" value="add ticket">
+    </form>
 </body>
 </html>

@@ -1,12 +1,10 @@
-package com.tracker.dao;
+package com.tracker.repository;
 
 import com.tracker.model.Ticket;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
-
+@Repository
 public interface TicketDao extends JpaRepository<Ticket, Integer> {
     Ticket findByIdNumber(Integer idNumber);
 }
