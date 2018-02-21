@@ -1,8 +1,8 @@
 package com.tracker.model;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -11,9 +11,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "TICKETS")
-@NoArgsConstructor
 @Getter
-@Setter
 public class Ticket {
 
     @Id
@@ -30,8 +28,8 @@ public class Ticket {
             mappedBy = "ticket",
             cascade = CascadeType.ALL,
             fetch = FetchType.EAGER)
+            @Fetch(FetchMode.SUBSELECT)
     private List<Commentary> commentaryList = new ArrayList<>();
-
 
     public Ticket(String reportedUser, String assignedUser, String status, String title, String description) {
         this.reportedUser = reportedUser;
@@ -39,5 +37,8 @@ public class Ticket {
         this.status = status;
         this.title = title;
         this.description = description;
+    }
+
+    public Ticket() {
     }
 }

@@ -1,7 +1,10 @@
 package com.tracker.facade;
 
+import com.tracker.constants.Constants;
 import com.tracker.model.Ticket;
+import com.tracker.model.User;
 import com.tracker.repository.TicketDao;
+import com.tracker.repository.UserDao;
 import com.tracker.repository.UserSelector;
 import com.tracker.repository.VariableRepository;
 import com.tracker.validator.UserValidator;
@@ -16,6 +19,9 @@ public class TrackerFacade {
 
     @Autowired
     private TicketDao ticketDao;
+
+    @Autowired
+    private UserDao userDao;
 
     @Autowired
     private UserValidator userValidator;
@@ -38,7 +44,7 @@ public class TrackerFacade {
     }
 
     public String runHomePage() {
-        VariableRepository.setCurrentUsername("");
+        VariableRepository.setCurrentUsername(Constants.STRING_EMPTY);
         return "index";
     }
 
@@ -57,7 +63,21 @@ public class TrackerFacade {
         return "validation";
     }
 
+    public String addNewUser(String username, String userPassword){
+        if(userValidator.checkLoginIsUnique(username)) {
+            userDao.save(new User(username, userPassword));
+            return "index";
+        }
+        else {
+            return "newUser";
+        }
+    }
+
     public String addNewTicket() {
         return "newTicket";
+    }
+
+    public String showRegisterTemplate() {
+        return "newUser";
     }
 }

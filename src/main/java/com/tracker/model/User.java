@@ -1,15 +1,12 @@
 package com.tracker.model;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "USERS")
-@NoArgsConstructor
 @Getter
 public class User {
 
@@ -20,10 +17,14 @@ public class User {
     private int id;
     @Column(name = "USERNAME", unique = true)
     private String userName;
+    @NotNull
     private String password;
 
     public User(String userName, String password) {
         this.userName = userName;
         this.password = password;
+    }
+
+    public User() {
     }
 }

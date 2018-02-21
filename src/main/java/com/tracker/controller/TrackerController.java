@@ -1,9 +1,6 @@
 package com.tracker.controller;
 
 import com.tracker.facade.TrackerFacade;
-import com.tracker.repository.TicketDao;
-import com.tracker.repository.UserDao;
-import com.tracker.validator.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,15 +9,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class TrackerController {
-
-    @Autowired
-    private UserDao userDao;
-
-    @Autowired
-    private TicketDao ticketDao;
-
-    @Autowired
-    private UserValidator userValidator;
 
     @Autowired
     private TrackerFacade trackerFacade;
@@ -38,6 +26,16 @@ public class TrackerController {
     @RequestMapping(value = "/ticket")
     public String editTicket(){
         return trackerFacade.editTicket();
+    }
+
+    @RequestMapping(value = "/registerUser")
+    public String showRegisterTemplate(){
+        return trackerFacade.showRegisterTemplate();
+    }
+
+    @RequestMapping(value = "/addUser")
+    public String registerUser(@RequestParam String newUsername,String newPassword){
+        return trackerFacade.addNewUser(newUsername, newPassword);
     }
 
     @RequestMapping(value = "/validation")

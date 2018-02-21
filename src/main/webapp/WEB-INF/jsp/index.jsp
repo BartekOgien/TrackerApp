@@ -1,4 +1,4 @@
-<%--
+<%@ page import="com.tracker.repository.VariableRepository" %><%--
   Created by IntelliJ IDEA.
   User: user
   Date: 2018-02-18
@@ -13,11 +13,16 @@
 <body>
     <h3>Log to your account</h3>
     <form method="GET" action="validation">
-        Login <br />
+        <p style="color:#FF0000";><%= VariableRepository.getCurrentLoginError() %></p>
+        Login: <br />
         <input type="text" name="username" /><br />
         Password: <br />
         <input type="password" name="userPassword" /><br />
         <input type="submit" value="Log in">
+    </form>
+    <br>
+    <form method="post" action="registerUser">
+        <input type="submit" value="register new user">
     </form>
 </body>
 </html>

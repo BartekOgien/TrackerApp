@@ -9,6 +9,7 @@ import java.util.Random;
 
 @Service
 public class UserSelector {
+    private final static String NO_USER = "No user";
 
     @Autowired
     private UserDao userDao;
@@ -22,7 +23,7 @@ public class UserSelector {
             return userList.get(randomNumber).getUserName() ;
         }
         else {
-            return "No user";
+            return NO_USER;
         }
     }
 }
