@@ -11,7 +11,6 @@
     <title>Ticket</title>
 </head>
 <body>
-    <p>You are logged as: <%= VariableRepository.getCurrentUser().getUserName() %></p>
     <form method="post" action="/">
     <input type="submit" value="Log out">
     </form>

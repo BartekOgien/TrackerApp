@@ -8,14 +8,14 @@ import java.util.Date;
 public class CommentaryDto {
     private int id;
     private String comment;
-    private String userName;
+    private User user;
     private Date created;
     private TicketDto ticket;
 
-    public CommentaryDto(int id, String comment, String userName, Date created, TicketDto ticket) {
+    public CommentaryDto(int id, String comment, User user, Date created, TicketDto ticket) {
         this.id = id;
         this.comment = comment;
-        this.userName = userName;
+        this.user = user;
         this.created = created;
         this.ticket = ticket;
     }

@@ -32,11 +32,11 @@ public class Mapper {
     }
 
     public Commentary mapToCommentary(CommentaryDto commentaryDto) {
-        return new Commentary(commentaryDto.getId(), commentaryDto.getComment(), commentaryDto.getUserName(), mapper.mapToTicket(commentaryDto.getTicket()));
+        return new Commentary(commentaryDto.getId(), commentaryDto.getComment(), commentaryDto.getUser(), mapper.mapToTicket(commentaryDto.getTicket()));
     }
 
     public CommentaryDto mapToCommentaryDto(Commentary commentary) {
-        return new CommentaryDto(commentary.getId(), commentary.getComment(), commentary.getUserName(), commentary.getCreated(),
+        return new CommentaryDto(commentary.getId(), commentary.getComment(), commentary.getUser(), commentary.getCreated(),
                 mapper.mapToTicketDto(commentary.getTicket()));
     }
 

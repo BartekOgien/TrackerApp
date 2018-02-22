@@ -12,7 +12,6 @@
     <title>Create new Ticket</title>
 </head>
 <body>
-<p>You are logged as: <%= VariableRepository.getCurrentUser().getUserName() %></p>
 <form method="GET" action="ticketListAddTicket">
     Status <br />
     <select name="status">

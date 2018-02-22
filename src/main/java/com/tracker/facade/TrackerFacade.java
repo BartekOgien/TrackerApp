@@ -44,8 +44,6 @@ public class TrackerFacade {
         User reportedUser = VariableRepository.getCurrentUser();
         User assignedUser = userSelector.assignUser();
         Ticket ticket = mapper.mapToTicket(new TicketDto(reportedUser, assignedUser, status, title, description));
-        reportedUser.getReportedTicketList().add(ticket);
-        assignedUser.getAssignedTicketList().add(ticket);
         ticketDao.save(ticket);
         List<TicketDto> ticketDtoList = mapper.mapToTicketDtoList(ticketDao.findAll());
         model.addAttribute("listOfTickets", ticketDtoList);
@@ -58,7 +56,7 @@ public class TrackerFacade {
 
     public String addNewComment(int id){
         Ticket ticket = ticketDao.findOne(id);
-        ticket.getCommentaryList().add(new Commentary("dziala", "Ogien", ticket));
+        ticket.getCommentaryList().add(new Commentary("dziala", VariableRepository.getCurrentUser(), ticket));
         ticketDao.save(ticket);
         return "newComment";
     }

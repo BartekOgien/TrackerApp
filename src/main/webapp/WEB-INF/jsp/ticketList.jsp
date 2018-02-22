@@ -43,7 +43,7 @@
                     <td>
                         <ul>
                             <c:forEach var="comments" items="${ticketList.commentaryList}">
-                                <li>${comments.created} ${comments.userName} wrote: ${comments.comment}</li>
+                                <li>${comments.created} ${comments.user.userName} wrote: ${comments.comment}</li>
                             </c:forEach>
                             <li>
                                 <form method="GET" action="comment">

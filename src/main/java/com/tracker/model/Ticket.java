@@ -16,7 +16,8 @@ import java.util.List;
 public class Ticket {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @NotNull
+    @GeneratedValue
     @Column(name = "ID")
     private int idNumber;
     @ManyToOne
@@ -31,8 +32,7 @@ public class Ticket {
     @OneToMany(targetEntity = Commentary.class,
             mappedBy = "ticket",
             cascade = CascadeType.ALL,
-            fetch = FetchType.EAGER)
-    @Fetch(FetchMode.SUBSELECT)
+            fetch = FetchType.LAZY)
     private List<Commentary> commentaryList = new ArrayList<>();
 
     public Ticket(User reportedUser, User assignedUser, String status, String title, String description) {

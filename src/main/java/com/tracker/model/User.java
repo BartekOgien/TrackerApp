@@ -23,13 +23,18 @@ public class User {
     @OneToMany(targetEntity = Ticket.class,
             mappedBy = "reportedUser",
             cascade = CascadeType.ALL,
-            fetch = FetchType.EAGER)
+            fetch = FetchType.LAZY)
     private List<Ticket> reportedTicketList = new ArrayList<>();
     @OneToMany(targetEntity = Ticket.class,
             mappedBy = "assignedUser",
             cascade = CascadeType.ALL,
-            fetch = FetchType.EAGER)
+            fetch = FetchType.LAZY)
     private List<Ticket> assignedTicketList = new ArrayList<>();
+    @OneToMany(targetEntity = Commentary.class,
+            mappedBy = "user",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY)
+    private List<Commentary> commentList = new ArrayList<>();
 
     public User(String userName, String password) {
         this.userName = userName;

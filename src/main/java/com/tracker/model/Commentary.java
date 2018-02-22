@@ -11,39 +11,39 @@ import java.util.Date;
 
 @Entity
 @Table(name = "COMMENTS")
-@NoArgsConstructor
 @Getter
 @Setter
 public class Commentary {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @NotNull
+    @GeneratedValue
     @Column(name = "ID", unique = true)
     private int id;
     private String comment;
-    private String userName;
+    @ManyToOne
+    @JoinColumn(name = "USER_ID")
+    private User user;
     private Date created;
     @ManyToOne
     @JoinColumn(name = "TICKET_ID")
     private Ticket ticket;
 
-    public Commentary(String comment, String userName, Ticket ticket) {
+    public Commentary(String comment, User user, Ticket ticket) {
         this.comment = comment;
-        this.userName = userName;
+        this.user = user;
         this.created = new Date();
         this.ticket = ticket;
     }
 
-    public Commentary(int id, String comment, String userName, Ticket ticket) {
+    public Commentary(int id, String comment, User user, Ticket ticket) {
         this.id = id;
         this.comment = comment;
-        this.userName = userName;
+        this.user = user;
         this.created = new Date();
         this.ticket = ticket;
     }
 
-    public String formatDate(Date date) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yy HH:mm");
-        return dateFormat.format(date);
+    public Commentary() {
     }
 }

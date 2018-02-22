@@ -11,7 +11,6 @@
     <title>New comment</title>
 </head>
 <body>
-    <p>You are logged as: <%= VariableRepository.getCurrentUser().getUserName() %></p>
     <form method="GET" action="ticketListAddComment">
         Status <br />
         <input type="text" name="status" /><br />
