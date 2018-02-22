@@ -46,8 +46,6 @@ public class TrackerFacade {
         Ticket ticket = mapper.mapToTicket(new TicketDto(reportedUser, assignedUser, status, title, description));
         reportedUser.getReportedTicketList().add(ticket);
         assignedUser.getAssignedTicketList().add(ticket);
-        userDao.save(reportedUser);
-        userDao.save(assignedUser);
         ticketDao.save(ticket);
         List<TicketDto> ticketDtoList = mapper.mapToTicketDtoList(ticketDao.findAll());
         model.addAttribute("listOfTickets", ticketDtoList);
