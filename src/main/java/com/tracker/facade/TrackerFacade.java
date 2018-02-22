@@ -1,7 +1,9 @@
 package com.tracker.facade;
 
-import com.tracker.constants.Constants;
+import com.tracker.mapper.Mapper;
+import com.tracker.model.Commentary;
 import com.tracker.model.Ticket;
+import com.tracker.model.TicketDto;
 import com.tracker.model.User;
 import com.tracker.repository.TicketDao;
 import com.tracker.repository.UserDao;
@@ -29,26 +31,37 @@ public class TrackerFacade {
     @Autowired
     private UserSelector userSelector;
 
+    @Autowired
+    Mapper mapper;
+
     public String getListOfTickets(Model model) {
-        List<Ticket> ticketList = ticketDao.findAll();
+        List<TicketDto> ticketList = mapper.mapToTicketDtoList(ticketDao.findAll());
         model.addAttribute("listOfTickets", ticketList);
         return "ticketList";
     }
 
     public String getListOfTicketsAndNewTicket(Model model, String status, String title, String description) {
-        Ticket ticket = new Ticket(VariableRepository.getCurrentUsername(), userSelector.assignUser(), status, title, description);
+        User reportedUser = VariableRepository.getCurrentUser();
+        User assignedUser = userSelector.assignUser();
+        Ticket ticket = mapper.mapToTicket(new TicketDto(reportedUser, assignedUser, status, title, description));
+        reportedUser.getReportedTicketList().add(ticket);
+        assignedUser.getAssignedTicketList().add(ticket);
+        userDao.save(reportedUser);
+        userDao.save(assignedUser);
         ticketDao.save(ticket);
-        List<Ticket> ticketList = ticketDao.findAll();
-        model.addAttribute("listOfTickets", ticketList);
+        List<TicketDto> ticketDtoList = mapper.mapToTicketDtoList(ticketDao.findAll());
+        model.addAttribute("listOfTickets", ticketDtoList);
         return "ticketList";
     }
 
     public String runHomePage() {
-        VariableRepository.setCurrentUsername(Constants.STRING_EMPTY);
         return "index";
     }
 
-    public String addNewComment(){
+    public String addNewComment(int id){
+        Ticket ticket = ticketDao.findOne(id);
+        ticket.getCommentaryList().add(new Commentary("dziala", "Ogien", ticket));
+        ticketDao.save(ticket);
         return "newComment";
     }
 
@@ -57,7 +70,6 @@ public class TrackerFacade {
     }
 
     public String validateUsernameAndPassword(Model model, String username, String userPassword){
-        VariableRepository.setCurrentUsername(username);
         boolean validation = userValidator.validateUser(username, userPassword);
         model.addAttribute("validation", validation);
         return "validation";

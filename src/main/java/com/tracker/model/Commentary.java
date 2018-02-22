@@ -6,6 +6,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Entity
@@ -16,8 +17,7 @@ import java.util.Date;
 public class Commentary {
 
     @Id
-    @GeneratedValue
-    @NotNull
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ID", unique = true)
     private int id;
     private String comment;
@@ -32,5 +32,18 @@ public class Commentary {
         this.userName = userName;
         this.created = new Date();
         this.ticket = ticket;
+    }
+
+    public Commentary(int id, String comment, String userName, Ticket ticket) {
+        this.id = id;
+        this.comment = comment;
+        this.userName = userName;
+        this.created = new Date();
+        this.ticket = ticket;
+    }
+
+    public String formatDate(Date date) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yy HH:mm");
+        return dateFormat.format(date);
     }
 }

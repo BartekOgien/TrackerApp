@@ -19,8 +19,8 @@ public class TrackerController {
     }
 
     @RequestMapping(value = "/comment")
-    public String addComment(){
-        return trackerFacade.addNewComment();
+    public String addComment(@RequestParam int id){
+        return trackerFacade.addNewComment(id);
     }
 
     @RequestMapping(value = "/ticket")

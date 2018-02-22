@@ -13,7 +13,6 @@
     <title>List of tickets</title>
 </head>
 <body>
-    <p>You are logged as: <%= VariableRepository.getCurrentUsername() %></p>
     <form method="post" action="/">
         <input type="submit" value="Log out">
     </form>
@@ -32,33 +31,33 @@
                 <th>Edit Ticket</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody >
         <c:forEach var="ticketList" items="${listOfTickets}">
                 <tr>
                     <td>${ticketList.idNumber}</td>
-                    <td>${ticketList.reportedUser}</td>
-                    <td>${ticketList.assignedUser}</td>
+                    <td>${ticketList.reportedUser.userName}</td>
+                    <td>${ticketList.assignedUser.userName}</td>
                     <td>${ticketList.status}</td>
                     <td>${ticketList.title}</td>
                     <td>${ticketList.description}</td>
                     <td>
                         <ul>
                             <c:forEach var="comments" items="${ticketList.commentaryList}">
-                                <li>${comments.comment}</li>
+                                <li>${comments.created} ${comments.userName} wrote: ${comments.comment}</li>
                             </c:forEach>
                             <li>
-                                <form method="post" action="comment">
+                                <form method="GET" action="comment">
                                     <input type="submit" value="add comment">
                                 </form>
                             </li>
                         </ul>
                     </td>
-              <td>
-                  <form method="post" action="ticket">
-                      <input type="submit" value="edit ticket">
-                  </form>
-              </td>
-          </tr>
+                    <td>
+                         <form method="post" action="ticket">
+                           <input  type="submit" value="edit ticket">
+                         </form>
+                     </td>
+                 </tr>
   </c:forEach>
   </tbody>
 </table>

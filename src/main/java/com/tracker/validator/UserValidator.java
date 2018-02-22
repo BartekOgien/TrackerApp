@@ -24,6 +24,7 @@ public class UserValidator {
         }
         else {
             if(userFromDb.getPassword().equals(validatedPassword)) {
+                VariableRepository.setCurrentUser(userFromDb);
                 VariableRepository.setCurrentLoginError(Constants.STRING_EMPTY);
                 return true;
             }

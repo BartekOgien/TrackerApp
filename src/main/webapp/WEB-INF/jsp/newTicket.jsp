@@ -1,5 +1,4 @@
-<%@ page import="com.tracker.model.User" %>
-<%@ page import="com.tracker.model.Ticket" %>
+
 <%@ page import="com.tracker.repository.VariableRepository" %><%--
   Created by IntelliJ IDEA.
   User: user
@@ -13,7 +12,7 @@
     <title>Create new Ticket</title>
 </head>
 <body>
-<p>You are logged as: <%= VariableRepository.getCurrentUsername() %></p>
+<p>You are logged as: <%= VariableRepository.getCurrentUser().getUserName() %></p>
 <form method="GET" action="ticketListAddTicket">
     Status <br />
     <select name="status">

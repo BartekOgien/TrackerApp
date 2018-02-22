@@ -1,6 +1,7 @@
 package com.tracker.model;
 
 import lombok.*;
+import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
@@ -15,12 +16,15 @@ import java.util.List;
 public class Ticket {
 
     @Id
-    @GeneratedValue
-    @NotNull
-    @Column(name = "ID", unique = true)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "ID")
     private int idNumber;
-    private String reportedUser;
-    private String assignedUser;
+    @ManyToOne
+    @JoinColumn(name = "REPORTED_USER_ID")
+    private User reportedUser;
+    @ManyToOne
+    @JoinColumn(name = "ASSIGNED_USER_ID")
+    private User assignedUser;
     private String status;
     private String title;
     private String description;
@@ -28,10 +32,19 @@ public class Ticket {
             mappedBy = "ticket",
             cascade = CascadeType.ALL,
             fetch = FetchType.EAGER)
-            @Fetch(FetchMode.SUBSELECT)
+    @Fetch(FetchMode.SUBSELECT)
     private List<Commentary> commentaryList = new ArrayList<>();
 
-    public Ticket(String reportedUser, String assignedUser, String status, String title, String description) {
+    public Ticket(User reportedUser, User assignedUser, String status, String title, String description) {
+        this.reportedUser = reportedUser;
+        this.assignedUser = assignedUser;
+        this.status = status;
+        this.title = title;
+        this.description = description;
+    }
+
+    public Ticket(int idNumber, User reportedUser, User assignedUser, String status, String title, String description) {
+        this.idNumber = idNumber;
         this.reportedUser = reportedUser;
         this.assignedUser = assignedUser;
         this.status = status;

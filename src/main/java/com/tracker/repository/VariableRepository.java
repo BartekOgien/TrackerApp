@@ -1,18 +1,19 @@
 package com.tracker.repository;
 
 import com.tracker.constants.Constants;
+import com.tracker.model.User;
 
 public class VariableRepository {
-    private static String currentUsername;
+    private static User currentUser;
     private static String currentLoginError = Constants.STRING_EMPTY;
     private static String currentRegisterError = Constants.STRING_EMPTY;
 
-    public static void setCurrentUsername(String currentUsername) {
-        VariableRepository.currentUsername = currentUsername;
+    public static void setCurrentUser(User currentUser) {
+        VariableRepository.currentUser = currentUser;
     }
 
-    public static String getCurrentUsername() {
-        return currentUsername;
+    public static User getCurrentUser() {
+        return currentUser;
     }
 
     public static void setCurrentLoginError(String currentLoginError) {

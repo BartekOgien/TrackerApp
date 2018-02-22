@@ -9,21 +9,20 @@ import java.util.Random;
 
 @Service
 public class UserSelector {
-    private final static String NO_USER = "No user";
 
     @Autowired
     private UserDao userDao;
 
-    public String assignUser() {
+    public User assignUser() {
         List<User> userList = userDao.findAll();
         Random randomGenerator = new Random();
         int randomNumber = randomGenerator.nextInt(userList.size());
 
         if(userList.size() > 0) {
-            return userList.get(randomNumber).getUserName() ;
+            return userList.get(randomNumber);
         }
         else {
-            return NO_USER;
+            return null;
         }
     }
 }
