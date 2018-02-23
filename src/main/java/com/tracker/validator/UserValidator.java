@@ -1,6 +1,7 @@
 package com.tracker.validator;
 
 import com.tracker.constants.Constants;
+import com.tracker.mapper.Mapper;
 import com.tracker.model.User;
 import com.tracker.repository.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,9 @@ public class UserValidator {
     @Autowired
     private UserDao userDao;
 
+    @Autowired
+    private Mapper mapper;
+
     public boolean validateUser(HttpServletRequest request, String validatedUserName, String validatedPassword) {
         User userFromDb = userDao.findByUserName(validatedUserName);
         if(userFromDb == null) {
@@ -28,7 +32,7 @@ public class UserValidator {
         }
         else {
             if(userFromDb.getPassword().equals(validatedPassword)) {
-                request.getSession().setAttribute(USER_VARIABLE, userFromDb);
+                request.getSession().setAttribute(USER_VARIABLE, mapper.mapToUserDto(userFromDb));
                 request.getSession().setAttribute(LOGIN_ERROR, Constants.STRING_EMPTY);
                 return true;
             }

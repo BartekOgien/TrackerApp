@@ -21,8 +21,8 @@ public class TrackerController {
     }
 
     @RequestMapping(value = "/comment")
-    public String addComment(@RequestParam int id){
-        return trackerFacade.addNewComment(id);
+    public String addComment(Model model, HttpServletRequest request){
+        return trackerFacade.addNewComment(model, request);
     }
 
     @RequestMapping(value = "/ticket")
@@ -36,7 +36,7 @@ public class TrackerController {
     }
 
     @RequestMapping(value = "/addUser")
-    public String registerUser(HttpServletRequest request,@RequestParam String newUsername,String newPassword){
+    public String registerUser(HttpServletRequest request, @RequestParam String newUsername,String newPassword){
         return trackerFacade.addNewUser(request, newUsername, newPassword);
     }
 

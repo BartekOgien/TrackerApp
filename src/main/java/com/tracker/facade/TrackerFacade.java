@@ -1,10 +1,7 @@
 package com.tracker.facade;
 
 import com.tracker.mapper.Mapper;
-import com.tracker.model.Commentary;
-import com.tracker.model.Ticket;
-import com.tracker.model.TicketDto;
-import com.tracker.model.User;
+import com.tracker.model.*;
 import com.tracker.repository.TicketDao;
 import com.tracker.repository.UserDao;
 import com.tracker.repository.UserSelector;
@@ -14,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -40,9 +38,9 @@ public class TrackerFacade {
     }
 
     public String getListOfTicketsAndNewTicket(HttpServletRequest request, Model model, String status, String title, String description) {
-        User reportedUser = (User)request.getSession().getAttribute("user");
+        UserDto reportedUser = (UserDto)request.getSession().getAttribute("user");
         User assignedUser = userSelector.assignUser();
-        Ticket ticket = mapper.mapToTicket(new TicketDto(reportedUser, assignedUser, status, title, description));
+        Ticket ticket = mapper.mapToTicket(new TicketDto(reportedUser, mapper.mapToUserDto(assignedUser), status, title, description, new ArrayList<>()));
         ticketDao.save(ticket);
         getListOfAllTickets(model);
         return "ticketList";
@@ -52,12 +50,13 @@ public class TrackerFacade {
         return "index";
     }
 
-    public String addNewComment(int id){
-        User user = userDao.findOne(1);
-        Ticket ticket = ticketDao.findOne(id);
-        ticket.getCommentaryList().add(new Commentary("dziala", user, ticket));
+    public String addNewComment(Model model, HttpServletRequest request){
+        UserDto user = (UserDto)request.getSession().getAttribute("user");
+        Ticket ticket = ticketDao.findOne(3);
+        ticket.getCommentaryList().add(new Commentary("dziala", mapper.mapToUser(user), ticket));
         ticketDao.save(ticket);
-        return "newComment";
+        getListOfAllTickets(model);
+        return "ticketList";
     }
 
     public String editTicket(){

@@ -8,11 +8,11 @@ import java.util.Date;
 public class CommentaryDto {
     private int id;
     private String comment;
-    private User user;
+    private UserDto user;
     private Date created;
     private TicketDto ticket;
 
-    public CommentaryDto(int id, String comment, User user, Date created, TicketDto ticket) {
+    public CommentaryDto(int id, String comment, UserDto user, Date created, TicketDto ticket) {
         this.id = id;
         this.comment = comment;
         this.user = user;
