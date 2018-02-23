@@ -13,7 +13,7 @@
 <body>
     <h3>Log to your account</h3>
     <form method="post" action="validation">
-        <p style="color:#FF0000";>${loginError}</p>
+        <p style="color:#FF0000";>${sessionScope.loginError}</p>
         Login: <br />
         <input type="text" name="username"/><br />
         Password: <br />

@@ -11,6 +11,7 @@
     <title>Ticket</title>
 </head>
 <body>
+<p>You are logged as: ${sessionScope.user.userName}</p>
     <form method="post" action="/">
     <input type="submit" value="Log out">
     </form>

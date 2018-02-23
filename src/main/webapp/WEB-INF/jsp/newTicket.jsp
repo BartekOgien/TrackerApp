@@ -11,8 +11,10 @@
     <title>Create new Ticket</title>
 </head>
 <body>
+<p>You are logged as: ${sessionScope.user.userName}</p>
+<br>
 <h3>Add new ticket</h3>
-<form method="GET" action="ticketListAddTicket">
+<form method="post" action="ticketListAddTicket">
     Status <br />
     <select name="status">
         <option value="new" ${param.getStatus == '1' ? 'new' : ''}>new</option>

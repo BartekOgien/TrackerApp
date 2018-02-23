@@ -11,7 +11,9 @@
     <title>New comment</title>
 </head>
 <body>
-    <form method="GET" action="ticketListAddComment">
+<p>You are logged as: ${sessionScope.user.userName}</p>
+<br>
+    <form method="post" action="ticketListAddComment">
         Status <br />
         <input type="text" name="status" /><br />
         Title: <br />

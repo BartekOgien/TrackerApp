@@ -12,8 +12,8 @@
 </head>
 <body>
 <h3>Register new user</h3>
-<form method="GET" action="addUser">
-    <p style="color:#FF0000";>${registerError}</p>
+<form method="post" action="addUser">
+    <p style="color:#FF0000";>${sessionScope.registerError}</p>
     Your login <br />
     <input type="text" name="newUsername" /><br />
     Your password: <br />
