@@ -10,6 +10,7 @@ import java.util.List;
 @Entity
 @Table(name = "TICKETS")
 @Getter
+@Setter
 public class Ticket {
 
     @Id

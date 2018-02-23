@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class TrackerFacade {
@@ -61,8 +62,26 @@ public class TrackerFacade {
         return getListOfAllTickets(model);
     }
 
-    public String editTicket(){
-        return "singleTicket";
+    public String selectTicket(Model model, HttpServletRequest request, int id){
+        TicketDto ticketDto = mapper.mapToTicketDto(ticketDao.findOne(id));
+        model.addAttribute("ticketDto", ticketDto);
+        List<UserDto> userList = userDao.findAll().stream()
+                                .map(u ->mapper.mapToUserDto(u))
+                                .collect(Collectors.toList());
+        model.addAttribute("userList", userList);
+        request.getSession().setAttribute("id", id);
+        return "editTicket";
+    }
+
+    public String editTicket(Model model, HttpServletRequest request, int userId, String status, String title, String description){
+        Ticket ticket = ticketDao.findOne((int)request.getSession().getAttribute("id"));
+        User assignedUser = userDao.findOne(userId);
+        ticket.setAssignedUser(assignedUser);
+        ticket.setStatus(status);
+        ticket.setTitle(title);
+        ticket.setDescription(description);
+        ticketDao.save(ticket);
+        return getListOfAllTickets(model);
     }
 
     public String validateUsernameAndPassword(HttpServletRequest request, Model model, String username, String userPassword){

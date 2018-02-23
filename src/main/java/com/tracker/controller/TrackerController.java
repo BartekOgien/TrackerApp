@@ -30,9 +30,14 @@ public class TrackerController {
         return trackerFacade.addNewComment(request, id);
     }
 
-    @RequestMapping(value = "/ticket")
-    public String editTicket(){
-        return trackerFacade.editTicket();
+    @RequestMapping(value = "/selectTicket")
+    public String selectTicket(Model model, HttpServletRequest request, @RequestParam int id){
+        return trackerFacade.selectTicket(model, request, id);
+    }
+
+    @RequestMapping(value = "/editTicket")
+    public String editTicket(Model model, HttpServletRequest request, @RequestParam int userId, String status, String title, String description){
+        return trackerFacade.editTicket(model, request, userId, status, title, description);
     }
 
     @RequestMapping(value = "/registerUser")

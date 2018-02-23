@@ -12,15 +12,18 @@
 </head>
 <body>
 <p>You are logged as: ${sessionScope.user.userName}</p>
+<form method="post" action="/">
+    <input type="submit" value="Log out">
+</form>
 <br>
 <h3>Add new ticket</h3>
 <form method="post" action="ticketListAddTicket">
     Status <br />
     <select name="status">
-        <option value="new" ${param.getStatus == '1' ? 'new' : ''}>new</option>
-        <option value="in progress" ${param.getStatus == '2' ? 'in progress' : ''}>in progress</option>
-        <option value="reject" ${param.getStatus == '3' ? 'reject' : ''}>reject</option>
-        <option value="done" ${param.getStatus == '4' ? 'done' : ''}>done</option>
+        <option value="new">new</option>
+        <option value="in progress">in progress</option>
+        <option value="reject">reject</option>
+        <option value="done">done</option>
     </select>
     <br>
     Title: <br />

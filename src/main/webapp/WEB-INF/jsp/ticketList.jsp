@@ -44,10 +44,10 @@
                     <td>
                         <ul>
                             <c:forEach var="comments" items="${ticketList.commentaryList}">
-                                <li>${comments.created} ${comments.user.userName} wrote: ${comments.comment}</li>
+                                <li>${comments.created} | ${comments.user.userName} wrote: | ${comments.comment}</li>
                             </c:forEach>
                             <li>
-                                <form method="get" action="commentTemplate" >
+                                <form method="post" action="commentTemplate" >
                                     <input type="hidden" name="id" value="${ticketList.idNumber}" />
                                     <input type="submit" value="add comment">
                                 </form>
@@ -55,7 +55,8 @@
                         </ul>
                     </td>
                     <td>
-                         <form method="post" action="ticket">
+                         <form method="post" action="selectTicket">
+                             <input type="hidden" name="id" value="${ticketList.idNumber}" />
                            <input  type="submit" value="edit ticket">
                          </form>
                      </td>
