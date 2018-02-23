@@ -7,6 +7,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
+
 @Controller
 public class TrackerController {
 
@@ -34,13 +36,13 @@ public class TrackerController {
     }
 
     @RequestMapping(value = "/addUser")
-    public String registerUser(@RequestParam String newUsername,String newPassword){
-        return trackerFacade.addNewUser(newUsername, newPassword);
+    public String registerUser(HttpServletRequest request,@RequestParam String newUsername,String newPassword){
+        return trackerFacade.addNewUser(request, newUsername, newPassword);
     }
 
     @RequestMapping(value = "/validation")
-    public String validateUser(Model model, @RequestParam String username,String userPassword){
-        return trackerFacade.validateUsernameAndPassword(model, username, userPassword);
+    public String validateUser(HttpServletRequest request, Model model, @RequestParam String username, String userPassword){
+        return trackerFacade.validateUsernameAndPassword(request, model, username, userPassword);
     }
 
     @RequestMapping(value = "/ticketList")
@@ -49,8 +51,8 @@ public class TrackerController {
     }
 
     @RequestMapping(value = "/ticketListAddTicket")
-    public String getTicketListAddTicket(Model model, @RequestParam String status, String title, String description){
-        return trackerFacade.getListOfTicketsAndNewTicket(model, status, title, description);
+    public String getTicketListAddTicket(HttpServletRequest request, Model model, @RequestParam String status, String title, String description){
+        return trackerFacade.getListOfTicketsAndNewTicket(request, model, status, title, description);
     }
 
     @RequestMapping(value = "/newTicket")

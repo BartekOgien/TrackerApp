@@ -1,5 +1,4 @@
-
-<%@ page import="com.tracker.repository.VariableRepository" %><%--
+<%--
   Created by IntelliJ IDEA.
   User: user
   Date: 2018-02-19
@@ -12,6 +11,7 @@
     <title>Create new Ticket</title>
 </head>
 <body>
+<h3>Add new ticket</h3>
 <form method="GET" action="ticketListAddTicket">
     Status <br />
     <select name="status">

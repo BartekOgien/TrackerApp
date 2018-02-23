@@ -8,12 +8,12 @@ import com.tracker.model.User;
 import com.tracker.repository.TicketDao;
 import com.tracker.repository.UserDao;
 import com.tracker.repository.UserSelector;
-import com.tracker.repository.VariableRepository;
 import com.tracker.validator.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Service
@@ -40,8 +40,8 @@ public class TrackerFacade {
         return "ticketList";
     }
 
-    public String getListOfTicketsAndNewTicket(Model model, String status, String title, String description) {
-        User reportedUser = VariableRepository.getCurrentUser();
+    public String getListOfTicketsAndNewTicket(HttpServletRequest request, Model model, String status, String title, String description) {
+        User reportedUser = (User)request.getSession().getAttribute("user");
         User assignedUser = userSelector.assignUser();
         Ticket ticket = mapper.mapToTicket(new TicketDto(reportedUser, assignedUser, status, title, description));
         ticketDao.save(ticket);
@@ -55,8 +55,9 @@ public class TrackerFacade {
     }
 
     public String addNewComment(int id){
+        User user = userDao.findOne(1);
         Ticket ticket = ticketDao.findOne(id);
-        ticket.getCommentaryList().add(new Commentary("dziala", VariableRepository.getCurrentUser(), ticket));
+        ticket.getCommentaryList().add(new Commentary("dziala", user, ticket));
         ticketDao.save(ticket);
         return "newComment";
     }
@@ -65,14 +66,14 @@ public class TrackerFacade {
         return "singleTicket";
     }
 
-    public String validateUsernameAndPassword(Model model, String username, String userPassword){
-        boolean validation = userValidator.validateUser(username, userPassword);
+    public String validateUsernameAndPassword(HttpServletRequest request, Model model, String username, String userPassword){
+        boolean validation = userValidator.validateUser(request, username, userPassword);
         model.addAttribute("validation", validation);
         return "validation";
     }
 
-    public String addNewUser(String username, String userPassword){
-        if(userValidator.checkLoginIsUnique(username)) {
+    public String addNewUser(HttpServletRequest request, String username, String userPassword){
+        if(userValidator.checkLoginIsUnique(request, username)) {
             userDao.save(new User(username, userPassword));
             return "index";
         }

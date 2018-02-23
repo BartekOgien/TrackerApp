@@ -1,4 +1,4 @@
-<%@ page import="com.tracker.repository.VariableRepository" %><%--
+<%--
   Created by IntelliJ IDEA.
   User: user
   Date: 2018-02-19

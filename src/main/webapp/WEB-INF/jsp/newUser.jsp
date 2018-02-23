@@ -1,5 +1,5 @@
-<%@ page import="com.tracker.repository.VariableRepository" %><%--
-  Created by IntelliJ IDEA.
+
+<%--  Created by IntelliJ IDEA.
   User: user
   Date: 2018-02-20
   Time: 20:30
@@ -13,7 +13,7 @@
 <body>
 <h3>Register new user</h3>
 <form method="GET" action="addUser">
-    <p style="color:#FF0000";><%= VariableRepository.getCurrentRegisterError() %></p>
+    <p style="color:#FF0000";>${registerError}</p>
     Your login <br />
     <input type="text" name="newUsername" /><br />
     Your password: <br />
