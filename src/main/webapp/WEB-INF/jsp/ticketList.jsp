@@ -47,7 +47,8 @@
                                 <li>${comments.created} ${comments.user.userName} wrote: ${comments.comment}</li>
                             </c:forEach>
                             <li>
-                                <form method="GET" action="comment">
+                                <form method="get" action="commentTemplate" >
+                                    <input type="hidden" name="id" value="${ticketList.idNumber}" />
                                     <input type="submit" value="add comment">
                                 </form>
                             </li>

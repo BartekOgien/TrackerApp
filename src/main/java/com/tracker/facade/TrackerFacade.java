@@ -33,8 +33,7 @@ public class TrackerFacade {
     Mapper mapper;
 
     public String getListOfTickets(Model model) {
-        getListOfAllTickets(model);
-        return "ticketList";
+        return getListOfAllTickets(model);
     }
 
     public String getListOfTicketsAndNewTicket(HttpServletRequest request, Model model, String status, String title, String description) {
@@ -42,21 +41,24 @@ public class TrackerFacade {
         User assignedUser = userSelector.assignUser();
         Ticket ticket = mapper.mapToTicket(new TicketDto(reportedUser, mapper.mapToUserDto(assignedUser), status, title, description, new ArrayList<>()));
         ticketDao.save(ticket);
-        getListOfAllTickets(model);
-        return "ticketList";
+        return getListOfAllTickets(model);
     }
 
     public String runHomePage() {
         return "index";
     }
 
-    public String addNewComment(Model model, HttpServletRequest request){
+    public String addNewComment(HttpServletRequest request, int id){
+        request.getSession().setAttribute("id", id);
+        return "newComment";
+    }
+
+    public String saveComment(Model model, HttpServletRequest request, String comment){
         UserDto user = (UserDto)request.getSession().getAttribute("user");
-        Ticket ticket = ticketDao.findOne(3);
-        ticket.getCommentaryList().add(new Commentary("dziala", mapper.mapToUser(user), ticket));
+        Ticket ticket = ticketDao.findOne((int)request.getSession().getAttribute("id"));
+        ticket.getCommentaryList().add(new Commentary(comment, mapper.mapToUser(user), ticket));
         ticketDao.save(ticket);
-        getListOfAllTickets(model);
-        return "ticketList";
+        return getListOfAllTickets(model);
     }
 
     public String editTicket(){
@@ -65,8 +67,7 @@ public class TrackerFacade {
 
     public String validateUsernameAndPassword(HttpServletRequest request, Model model, String username, String userPassword){
         if(userValidator.validateUser(request, username, userPassword)) {
-            getListOfAllTickets(model);
-            return "ticketList";
+            return getListOfAllTickets(model);
         }
         return "index";
     }
@@ -89,8 +90,9 @@ public class TrackerFacade {
         return "newUser";
     }
 
-    public void getListOfAllTickets(Model model) {
+    public String getListOfAllTickets(Model model) {
         List<TicketDto> ticketDtoList = mapper.mapToTicketDtoList(ticketDao.findAll());
         model.addAttribute("listOfTickets", ticketDtoList);
+        return "ticketList";
     }
 }

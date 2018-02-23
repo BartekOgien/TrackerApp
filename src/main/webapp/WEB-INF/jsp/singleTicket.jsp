@@ -16,7 +16,7 @@
     <input type="submit" value="Log out">
     </form>
     <br>
-    <form method="post" action="/ticketList">
+    <form method="post" action="ticketList">
         <input type="submit" value="back to list">
     </form>
     <br>

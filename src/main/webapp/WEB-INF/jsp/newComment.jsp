@@ -13,19 +13,14 @@
 <body>
 <p>You are logged as: ${sessionScope.user.userName}</p>
 <br>
-    <form method="post" action="ticketListAddComment">
-        Status <br />
-        <input type="text" name="status" /><br />
-        Title: <br />
-        <input type="text" name="title" /><br />
-        Description <br />
-        <input type="text" name="description" /><br />
-        <input type="submit" value="create ticket">
+    <form method="post" action="comment">
+        Comment: <br />
+        <input type="text" name="comment" /><br />
+        <input type="submit" value="add comment">
     </form>
     <br>
-    <form method="post" action="/ticketList">
+    <form method="get" action="ticketList">
         <input type="submit" value="back to list">
     </form>
-    <p>work in progress</p>
 </body>
 </html>

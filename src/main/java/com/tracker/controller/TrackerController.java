@@ -21,8 +21,13 @@ public class TrackerController {
     }
 
     @RequestMapping(value = "/comment")
-    public String addComment(Model model, HttpServletRequest request){
-        return trackerFacade.addNewComment(model, request);
+    public String postComment(Model model, HttpServletRequest request, @RequestParam String comment){
+        return trackerFacade.saveComment(model, request, comment);
+    }
+
+    @RequestMapping(value = "/commentTemplate")
+    public String addComment(HttpServletRequest request, @RequestParam int id){
+        return trackerFacade.addNewComment(request, id);
     }
 
     @RequestMapping(value = "/ticket")
