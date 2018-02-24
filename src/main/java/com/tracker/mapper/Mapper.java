@@ -1,6 +1,11 @@
 package com.tracker.mapper;
 
-import com.tracker.model.*;
+import com.tracker.model.domain.Commentary;
+import com.tracker.model.domain.Ticket;
+import com.tracker.model.domain.User;
+import com.tracker.model.dto.CommentaryDto;
+import com.tracker.model.dto.TicketDto;
+import com.tracker.model.dto.UserDto;
 import com.tracker.repository.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

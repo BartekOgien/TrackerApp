@@ -1,7 +1,11 @@
 package com.tracker.facade;
 
 import com.tracker.mapper.Mapper;
-import com.tracker.model.*;
+import com.tracker.model.domain.Commentary;
+import com.tracker.model.domain.Ticket;
+import com.tracker.model.domain.User;
+import com.tracker.model.dto.TicketDto;
+import com.tracker.model.dto.UserDto;
 import com.tracker.repository.TicketDao;
 import com.tracker.repository.UserDao;
 import com.tracker.repository.UserSelector;
@@ -86,6 +90,11 @@ public class TrackerFacade {
         ticket.setTitle(title);
         ticket.setDescription(description);
         ticketDao.save(ticket);
+        return getListOfAllTickets(model);
+    }
+
+    public String deleteTicket(Model model, int userId){
+        ticketDao.delete(userId);
         return getListOfAllTickets(model);
     }
 

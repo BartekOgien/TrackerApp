@@ -1,4 +1,4 @@
-package com.tracker.model;
+package com.tracker.model.dto;
 
 import lombok.Getter;
 import lombok.Setter;

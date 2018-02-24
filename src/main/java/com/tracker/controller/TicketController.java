@@ -10,14 +10,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.servlet.http.HttpServletRequest;
 
 @Controller
-public class TrackerController {
+public class TicketController {
     @Autowired
     private TrackerFacade trackerFacade;
-
-    @RequestMapping("/")
-    public String runIndex(){
-        return trackerFacade.runHomePage();
-    }
 
     @RequestMapping(value = "/comment")
     public String postComment(Model model, HttpServletRequest request, @RequestParam String comment){
@@ -39,19 +34,9 @@ public class TrackerController {
         return trackerFacade.editTicket(model, request, userId, status, title, description);
     }
 
-    @RequestMapping(value = "/registerUser")
-    public String showRegisterTemplate(){
-        return trackerFacade.showRegisterTemplate();
-    }
-
-    @RequestMapping(value = "/addUser")
-    public String registerUser(HttpServletRequest request, @RequestParam String newUsername,String newPassword){
-        return trackerFacade.addNewUser(request, newUsername, newPassword);
-    }
-
-    @RequestMapping(value = "/validation")
-    public String validateUser(HttpServletRequest request, Model model, @RequestParam String username, String userPassword){
-        return trackerFacade.validateUsernameAndPassword(request, model, username, userPassword);
+    @RequestMapping(value = "/deleteTicket")
+    public String deleteTicket(Model model, @RequestParam int id){
+        return trackerFacade.deleteTicket(model, id);
     }
 
     @RequestMapping(value = "/ticketList")

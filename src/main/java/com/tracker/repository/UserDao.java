@@ -1,6 +1,6 @@
 package com.tracker.repository;
 
-import com.tracker.model.User;
+import com.tracker.model.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

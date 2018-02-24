@@ -30,6 +30,7 @@
                 <th>Description</th>
                 <th>Comments</th>
                 <th>Edit Ticket</th>
+                <th>Delete Ticket</th>
             </tr>
         </thead>
         <tbody >
@@ -60,6 +61,12 @@
                            <input  type="submit" value="edit ticket">
                          </form>
                      </td>
+                    <td>
+                        <form method="post" action="deleteTicket">
+                            <input type="hidden" name="id" value="${ticketList.idNumber}" />
+                            <input  type="submit" value="delete ticket" style="color:red">
+                        </form>
+                    </td>
                  </tr>
   </c:forEach>
   </tbody>

@@ -2,7 +2,7 @@ package com.tracker.validator;
 
 import com.tracker.constants.Constants;
 import com.tracker.mapper.Mapper;
-import com.tracker.model.User;
+import com.tracker.model.domain.User;
 import com.tracker.repository.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

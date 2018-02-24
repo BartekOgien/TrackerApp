@@ -1,6 +1,6 @@
 package com.tracker.repository;
 
-import com.tracker.model.User;
+import com.tracker.model.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

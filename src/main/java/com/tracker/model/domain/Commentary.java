@@ -1,4 +1,4 @@
-package com.tracker.model;
+package com.tracker.model.domain;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

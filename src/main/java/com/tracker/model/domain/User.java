@@ -1,5 +1,7 @@
-package com.tracker.model;
+package com.tracker.model.domain;
 
+import com.tracker.model.domain.Commentary;
+import com.tracker.model.domain.Ticket;
 import lombok.Getter;
 
 import javax.persistence.*;
