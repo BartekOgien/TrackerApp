@@ -9,7 +9,6 @@ import java.util.Random;
 
 @Service
 public class UserSelector {
-
     @Autowired
     private UserDao userDao;
 

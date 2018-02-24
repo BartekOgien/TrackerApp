@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class TrackerController {
-
     @Autowired
     private TrackerFacade trackerFacade;
 

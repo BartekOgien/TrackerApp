@@ -17,6 +17,11 @@ import java.util.stream.Collectors;
 
 @Service
 public class TrackerFacade {
+    private final static String SESSION_USER = "user";
+    private final static String SESSION_TICKET_ID = "id";
+    private final static String MODEL_USER_LIST = "userList";
+    private final static String MODEL_TICKET_LIST = "listOfTickets";
+    private final static String MODEL_TICKETDTO = "ticketDto";
 
     @Autowired
     private TicketDao ticketDao;
@@ -31,14 +36,14 @@ public class TrackerFacade {
     private UserSelector userSelector;
 
     @Autowired
-    Mapper mapper;
+    private Mapper mapper;
 
     public String getListOfTickets(Model model) {
         return getListOfAllTickets(model);
     }
 
     public String getListOfTicketsAndNewTicket(HttpServletRequest request, Model model, String status, String title, String description) {
-        UserDto reportedUser = (UserDto)request.getSession().getAttribute("user");
+        UserDto reportedUser = (UserDto)request.getSession().getAttribute(SESSION_USER);
         User assignedUser = userSelector.assignUser();
         Ticket ticket = mapper.mapToTicket(new TicketDto(reportedUser, mapper.mapToUserDto(assignedUser), status, title, description, new ArrayList<>()));
         ticketDao.save(ticket);
@@ -50,13 +55,13 @@ public class TrackerFacade {
     }
 
     public String addNewComment(HttpServletRequest request, int id){
-        request.getSession().setAttribute("id", id);
+        request.getSession().setAttribute(SESSION_TICKET_ID, id);
         return "newComment";
     }
 
     public String saveComment(Model model, HttpServletRequest request, String comment){
-        UserDto user = (UserDto)request.getSession().getAttribute("user");
-        Ticket ticket = ticketDao.findOne((int)request.getSession().getAttribute("id"));
+        UserDto user = (UserDto)request.getSession().getAttribute(SESSION_USER);
+        Ticket ticket = ticketDao.findOne((int)request.getSession().getAttribute(SESSION_TICKET_ID));
         ticket.getCommentaryList().add(new Commentary(comment, mapper.mapToUser(user), ticket));
         ticketDao.save(ticket);
         return getListOfAllTickets(model);
@@ -64,17 +69,17 @@ public class TrackerFacade {
 
     public String selectTicket(Model model, HttpServletRequest request, int id){
         TicketDto ticketDto = mapper.mapToTicketDto(ticketDao.findOne(id));
-        model.addAttribute("ticketDto", ticketDto);
+        model.addAttribute(MODEL_TICKETDTO, ticketDto);
         List<UserDto> userList = userDao.findAll().stream()
                                 .map(u ->mapper.mapToUserDto(u))
                                 .collect(Collectors.toList());
-        model.addAttribute("userList", userList);
-        request.getSession().setAttribute("id", id);
+        model.addAttribute(MODEL_USER_LIST, userList);
+        request.getSession().setAttribute(SESSION_TICKET_ID, id);
         return "editTicket";
     }
 
     public String editTicket(Model model, HttpServletRequest request, int userId, String status, String title, String description){
-        Ticket ticket = ticketDao.findOne((int)request.getSession().getAttribute("id"));
+        Ticket ticket = ticketDao.findOne((int)request.getSession().getAttribute(SESSION_TICKET_ID));
         User assignedUser = userDao.findOne(userId);
         ticket.setAssignedUser(assignedUser);
         ticket.setStatus(status);
@@ -111,7 +116,7 @@ public class TrackerFacade {
 
     public String getListOfAllTickets(Model model) {
         List<TicketDto> ticketDtoList = mapper.mapToTicketDtoList(ticketDao.findAll());
-        model.addAttribute("listOfTickets", ticketDtoList);
+        model.addAttribute(MODEL_TICKET_LIST, ticketDtoList);
         return "ticketList";
     }
 }

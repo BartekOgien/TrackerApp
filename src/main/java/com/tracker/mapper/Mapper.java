@@ -10,7 +10,6 @@ import java.util.stream.Collectors;
 
 @Service
 public class Mapper {
-
     @Autowired
     private Mapper mapper;
 
@@ -26,8 +25,11 @@ public class Mapper {
     }
 
     public TicketDto mapToTicketDto(Ticket ticket) {
+        List<CommentaryDto> commentaryDtoList = ticket.getCommentaryList().stream()
+                    .map(c -> mapToCommentaryDto(c))
+                    .collect(Collectors.toList());
         return new TicketDto(ticket.getIdNumber(), mapToUserDto(ticket.getReportedUser()), mapToUserDto(ticket.getAssignedUser()),
-                ticket.getStatus(), ticket.getTitle(), ticket.getDescription(), ticket.getCommentaryList());
+                ticket.getStatus(), ticket.getTitle(), ticket.getDescription(), commentaryDtoList);
     }
 
     public Ticket mapToTicket(TicketDto ticketDto) {
@@ -35,13 +37,8 @@ public class Mapper {
                 ticketDto.getStatus(), ticketDto.getTitle(), ticketDto.getDescription());
     }
 
-    public Commentary mapToCommentary(CommentaryDto commentaryDto) {
-        return new Commentary(commentaryDto.getId(), commentaryDto.getComment(), mapper.mapToUser(commentaryDto.getUser()), mapper.mapToTicket(commentaryDto.getTicket()));
-    }
-
     public CommentaryDto mapToCommentaryDto(Commentary commentary) {
-        return new CommentaryDto(commentary.getId(), commentary.getComment(), mapper.mapToUserDto(commentary.getUser()), commentary.getCreated(),
-                mapper.mapToTicketDto(commentary.getTicket()));
+        return new CommentaryDto(commentary.getComment(), mapper.mapToUserDto(commentary.getUser()), commentary.getCreated());
     }
 
     public List<TicketDto> mapToTicketDtoList(List<Ticket> ticketList) {

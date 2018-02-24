@@ -18,7 +18,7 @@
 <br>
     <form method="post" action="comment">
         Comment: <br />
-        <input type="text" name="comment" /><br />
+        <input type="text" name="comment" size="30"/><br />
         <input type="submit" value="add comment">
     </form>
     <br>

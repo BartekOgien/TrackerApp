@@ -1,6 +1,7 @@
 package com.tracker.model;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -11,6 +12,7 @@ import java.util.Date;
 @Table(name = "COMMENTS")
 @Getter
 @Setter
+@NoArgsConstructor
 public class Commentary {
 
     @Id
@@ -32,16 +34,5 @@ public class Commentary {
         this.user = user;
         this.created = new Date();
         this.ticket = ticket;
-    }
-
-    public Commentary(int id, String comment, User user, Ticket ticket) {
-        this.id = id;
-        this.comment = comment;
-        this.user = user;
-        this.created = new Date();
-        this.ticket = ticket;
-    }
-
-    public Commentary() {
     }
 }

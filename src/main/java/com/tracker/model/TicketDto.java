@@ -1,10 +1,12 @@
 package com.tracker.model;
 
 import lombok.Getter;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Setter
 @Getter
 public class TicketDto {
     private int idNumber;
@@ -13,9 +15,9 @@ public class TicketDto {
     private String status;
     private String title;
     private String description;
-    private List<Commentary> commentaryList = new ArrayList<>();
+    private List<CommentaryDto> commentaryList = new ArrayList<>();
 
-    public TicketDto(int idNumber, UserDto reportedUser, UserDto assignedUser, String status, String title, String description, List<Commentary> commentaryList) {
+    public TicketDto(int idNumber, UserDto reportedUser, UserDto assignedUser, String status, String title, String description, List<CommentaryDto> commentaryList) {
         this.idNumber = idNumber;
         this.reportedUser = reportedUser;
         this.assignedUser = assignedUser;
@@ -25,7 +27,7 @@ public class TicketDto {
         this.commentaryList = commentaryList;
     }
 
-    public TicketDto(UserDto reportedUser, UserDto assignedUser, String status, String title, String description, List<Commentary> commentaryList) {
+    public TicketDto(UserDto reportedUser, UserDto assignedUser, String status, String title, String description, List<CommentaryDto> commentaryList) {
         this.reportedUser = reportedUser;
         this.assignedUser = assignedUser;
         this.status = status;
