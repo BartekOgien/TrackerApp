@@ -18,19 +18,19 @@
     </form>
     <br>
 <form method="post" action="editTicket">
-<table border="1">
-    <thead>
-    <tr>
-        <th>Id</th>
-        <th>Reported user</th>
-        <th>Assigned user</th>
-        <th>Status</th>
-        <th>Title</th>
-        <th>Description</th>
-        <th>Comments</th>
-    </tr>
-    </thead>
-    <tbody >
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Reported user</th>
+                <th>Assigned user</th>
+                <th>Status</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Comments</th>
+            </tr>
+        </thead>
+        <tbody >
         <tr>
             <td>${ticketDto.idNumber}</td>
             <td>${ticketDto.reportedUser.userName}</td>
@@ -65,7 +65,7 @@
         </tr>
     </tbody>
 </table>
-<br>
+    <br>
     <input type="submit" value="save ticket">
 </form>
 <br>

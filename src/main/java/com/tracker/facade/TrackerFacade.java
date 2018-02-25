@@ -93,8 +93,8 @@ public class TrackerFacade {
         return getListOfAllTickets(model);
     }
 
-    public String deleteTicket(Model model, int userId){
-        ticketDao.delete(userId);
+    public String deleteTicket(Model model, int ticketId){
+        ticketDao.delete(ticketId);
         return getListOfAllTickets(model);
     }
 
