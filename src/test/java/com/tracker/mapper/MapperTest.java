@@ -7,16 +7,15 @@ import com.tracker.model.dto.CommentaryDto;
 import com.tracker.model.dto.TicketDto;
 import com.tracker.model.dto.UserDto;
 import com.tracker.repository.UserDao;
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-
 import java.util.ArrayList;
 import java.util.Date;
 
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -39,8 +38,8 @@ public class MapperTest {
         UserDto userDto = mapper.mapToUserDto(user);
 
         //Then
-        Assert.assertEquals(1, userDto.getId());
-        Assert.assertEquals("Username", userDto.getUserName());
+        assertEquals(1, userDto.getId());
+        assertEquals("Username", userDto.getUserName());
     }
 
     @Test
@@ -57,9 +56,9 @@ public class MapperTest {
         CommentaryDto commentaryDto = mapper.mapToCommentaryDto(commentary);
 
         //Then
-        Assert.assertEquals("Commentary", commentaryDto.getComment());
-        Assert.assertEquals("Username", commentaryDto.getUser().getUserName());
-        Assert.assertEquals(commentaryCreatedDate, commentaryDto.getCreated());
+        assertEquals("Commentary", commentaryDto.getComment());
+        assertEquals("Username", commentaryDto.getUser().getUserName());
+        assertEquals(commentaryCreatedDate, commentaryDto.getCreated());
     }
 
     @Test
@@ -74,8 +73,8 @@ public class MapperTest {
         Ticket resultTicket = mapper.mapToTicket(ticketDto);
 
         //Then
-        Assert.assertEquals("username", resultTicket.getReportedUser().getUserName());
-        Assert.assertEquals("title", resultTicket.getTitle());
+        assertEquals("username", resultTicket.getReportedUser().getUserName());
+        assertEquals("title", resultTicket.getTitle());
     }
 
     @Test
@@ -90,6 +89,6 @@ public class MapperTest {
         TicketDto resultTicketDto = mapper.mapToTicketDto(ticket);
 
         //Then
-        Assert.assertEquals("username", resultTicketDto.getReportedUser().getUserName());
+        assertEquals("username", resultTicketDto.getReportedUser().getUserName());
     }
 }

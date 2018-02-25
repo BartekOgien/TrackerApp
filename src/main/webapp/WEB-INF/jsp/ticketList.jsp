@@ -13,7 +13,7 @@
     <title>List of tickets</title>
 </head>
 <body>
-<p>You are logged as: ${sessionScope.user.userName}</p>
+    <p>You are logged as: ${sessionScope.user.userName}</p>
     <form method="post" action="/">
         <input type="submit" value="Log out">
     </form>
@@ -34,7 +34,7 @@
             </tr>
         </thead>
         <tbody >
-        <c:forEach var="ticketList" items="${listOfTickets}">
+            <c:forEach var="ticketList" items="${listOfTickets}">
                 <tr>
                     <td>${ticketList.idNumber}</td>
                     <td>${ticketList.reportedUser.userName}</td>
@@ -47,20 +47,20 @@
                             <c:forEach var="comments" items="${ticketList.commentaryList}">
                                 <li>${comments.created} | ${comments.user.userName} wrote: | ${comments.comment}</li>
                             </c:forEach>
-                            <li>
-                                <form method="post" action="commentTemplate" >
-                                    <input type="hidden" name="id" value="${ticketList.idNumber}" />
-                                    <input type="submit" value="add comment">
-                                </form>
-                            </li>
+                                <li>
+                                    <form method="post" action="commentTemplate" >
+                                        <input type="hidden" name="id" value="${ticketList.idNumber}" />
+                                        <input type="submit" value="add comment">
+                                     </form>
+                                </li>
                         </ul>
                     </td>
                     <td>
                          <form method="post" action="selectTicket">
                              <input type="hidden" name="id" value="${ticketList.idNumber}" />
-                           <input  type="submit" value="edit ticket">
+                             <input  type="submit" value="edit ticket">
                          </form>
-                     </td>
+                    </td>
                     <td>
                         <form method="post" action="deleteTicket">
                             <input type="hidden" name="id" value="${ticketList.idNumber}" />
@@ -68,9 +68,9 @@
                         </form>
                     </td>
                  </tr>
-  </c:forEach>
-  </tbody>
-</table>
+        </c:forEach>
+        </tbody>
+    </table>
     <form method="post" action="newTicket">
         <input type="submit" value="add ticket">
     </form>
