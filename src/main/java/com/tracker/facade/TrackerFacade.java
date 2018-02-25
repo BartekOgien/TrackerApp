@@ -42,10 +42,6 @@ public class TrackerFacade {
     @Autowired
     private Mapper mapper;
 
-    public String getListOfTickets(Model model) {
-        return getListOfAllTickets(model);
-    }
-
     public String getListOfTicketsAndNewTicket(HttpServletRequest request, Model model, String status, String title, String description) {
         UserDto reportedUser = (UserDto)request.getSession().getAttribute(SESSION_USER);
         User assignedUser = userSelector.assignUser();

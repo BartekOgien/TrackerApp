@@ -41,7 +41,7 @@ public class TicketController {
 
     @RequestMapping(value = "/ticketList")
     public String getTicketList(Model model){
-        return trackerFacade.getListOfTickets(model);
+        return trackerFacade.getListOfAllTickets(model);
     }
 
     @RequestMapping(value = "/ticketListAddTicket")
