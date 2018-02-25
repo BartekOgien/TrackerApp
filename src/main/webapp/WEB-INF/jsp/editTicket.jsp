@@ -53,7 +53,7 @@
                 </td>
                 <td><input type="text"  name="title"
                        value="${ticketDto.title}"></td>
-                <td><input type="text"  name="description"
+                <td><input type="text"  name="description" size="30"
                        value="${ticketDto.description}"></td>
                 <td>
                     <ul>
