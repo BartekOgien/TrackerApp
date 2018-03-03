@@ -21,7 +21,7 @@
         <input type="submit" value="Log in">
     </form>
     <br>
-    <form method="post" action="registerUser">
+    <form method="get" action="registerUser">
         <input type="submit" value="register new user">
     </form>
 </body>

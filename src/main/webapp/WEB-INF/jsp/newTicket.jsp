@@ -34,7 +34,7 @@
 </form>
 <br>
 <br>
-<form method="post" action="/ticketList">
+<form method="get" action="/ticketList">
     <input type="submit" value="back to list">
 </form>
 </body>

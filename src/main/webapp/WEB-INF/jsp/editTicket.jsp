@@ -13,11 +13,11 @@
 </head>
 <body>
 <p>You are logged as: ${sessionScope.user.userName}</p>
-    <form method="post" action="/">
+    <form method="get" action="/">
         <input type="submit" value="Log out">
     </form>
     <br>
-<form method="post" action="editTicket">
+<form method="put" action="editTicket">
     <table border="1">
         <thead>
             <tr>
@@ -69,7 +69,7 @@
     <input type="submit" value="save ticket">
 </form>
 <br>
-    <form method="post" action="ticketList">
+    <form method="get" action="ticketList">
         <input type="submit" value="back to list">
     </form>
 </body>

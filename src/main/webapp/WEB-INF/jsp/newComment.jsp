@@ -12,7 +12,7 @@
 </head>
 <body>
 <p>You are logged as: ${sessionScope.user.userName}</p>
-<form method="post" action="/">
+<form method="get" action="/">
     <input type="submit" value="Log out">
 </form>
 <br>

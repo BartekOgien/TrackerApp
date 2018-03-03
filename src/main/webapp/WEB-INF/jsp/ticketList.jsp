@@ -14,7 +14,7 @@
 </head>
 <body>
     <p>You are logged as: ${sessionScope.user.userName}</p>
-    <form method="post" action="/">
+    <form method="get" action="/">
         <input type="submit" value="Log out">
     </form>
     <br>
@@ -48,7 +48,7 @@
                                 <li>${comments.created} | ${comments.user.userName} wrote: | ${comments.comment}</li>
                             </c:forEach>
                                 <li>
-                                    <form method="post" action="commentTemplate" >
+                                    <form method="get" action="commentTemplate" >
                                         <input type="hidden" name="id" value="${ticketList.idNumber}" />
                                         <input type="submit" value="add comment">
                                      </form>
@@ -56,13 +56,13 @@
                         </ul>
                     </td>
                     <td>
-                         <form method="post" action="selectTicket">
+                         <form method="get" action="selectTicket">
                              <input type="hidden" name="id" value="${ticketList.idNumber}" />
                              <input  type="submit" value="edit ticket">
                          </form>
                     </td>
                     <td>
-                        <form method="post" action="deleteTicket">
+                        <form method="delete" action="deleteTicket">
                             <input type="hidden" name="id" value="${ticketList.idNumber}" />
                             <input  type="submit" value="delete ticket" style="color:red">
                         </form>
